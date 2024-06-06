@@ -1,11 +1,19 @@
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// builder.Services.AddSingleton<IDoctorRepository, DoctorRepository>();
+// builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddTransient<IDoctorRepository, DoctorRepository>();
+
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 
 // Add services to the container.
 builder.Services.AddMvc(options =>
